@@ -1,19 +1,37 @@
 {
   "name": "unaxy",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.0",
+  "homepage": "https://github.com/riodw/unaxy",
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "build_prod": "vue-tsc --noEmit && vite build",
+    "dev": "vite --port 8080",
+    "format": "prettier --config .prettierrc . --write",
+    "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --fix src",
+    "prepare": "husky install",
+    "preview": "vite preview",
+    "start": "node serve.js"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --cache --fix",
+    "*.--write": "prettier --write"
   },
   "dependencies": {
     "vue": "^3.2.45",
+    "vue-router": "^4.1.6",
     "vuetify": "^3.1.8"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
-    "vite": "^4.1.0"
+    "prettier": "^2.8.3",
+    "husky": "^8.0.3",
+    "unplugin-auto-import": "^0.15.1",
+    "unplugin-vue-components": "^0.24.1",
+    "vite": "^4.1.0",
+    "vite-plugin-pages": "^0.28.0",
+    "vite-plugin-vuetify": "^1.0.2",
+    "vue-tsc": "^1.2.0"
   }
 }

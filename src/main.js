@@ -1,5 +1,7 @@
 import { createApp } from "vue";
+import { createRouter, createWebHashHistory } from "vue-router";
 import App from "./App.vue";
+import routes from "~pages";
 
 // Vuetify
 import "vuetify/styles";
@@ -12,4 +14,26 @@ const vuetify = createVuetify({
   directives,
 });
 
-createApp(App).use(vuetify).mount("#app");
+// routes.push({
+//   path: "/properties/:id",
+//   name: "property",
+//   component: () => import("./pages/properties/[id].vue"),
+// });
+
+// router
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes,
+  linkActiveClass: "active",
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) return savedPosition;
+    return { top: 0 };
+  },
+});
+
+const app = createApp(App);
+
+app.use(router);
+app.use(vuetify);
+
+app.mount("#app");
