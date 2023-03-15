@@ -1,26 +1,29 @@
-import { fileURLToPath, URL } from "url";
 import path from "path";
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import vuetify from "vite-plugin-vuetify";
+import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 import Pages from "vite-plugin-pages";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
+import { defineConfig } from "vite";
+import { fileURLToPath, URL } from "node:url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      "~/": `${path.resolve(__dirname, "src")}/`,
       "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "~/": `${path.resolve(__dirname, "src")}/`,
     },
+    extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
   plugins: [
     vue({
-      include: [/\.vue$/],
+      template: { transformAssetUrls },
     }),
-
-    vuetify(),
+    // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
+    vuetify({
+      autoImport: true,
+    }),
 
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
@@ -38,4 +41,8 @@ export default defineConfig({
       /* options */
     }),
   ],
+  define: { "process.env": {} },
+  server: {
+    port: 3000,
+  },
 });
