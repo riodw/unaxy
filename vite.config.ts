@@ -1,29 +1,26 @@
+import { fileURLToPath, URL } from "url";
 import path from "path";
-import vue from "@vitejs/plugin-vue";
-import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+import { defineConfig } from "vite";
+import Vue from "@vitejs/plugin-vue";
+import eslintPlugin from "vite-plugin-eslint";
 import Pages from "vite-plugin-pages";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { defineConfig } from "vite";
-import { fileURLToPath, URL } from "node:url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
       "~/": `${path.resolve(__dirname, "src")}/`,
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
-    extensions: [".js", ".json", ".jsx", ".mjs", ".ts", ".tsx", ".vue"],
   },
+
   plugins: [
-    vue({
-      template: { transformAssetUrls },
+    Vue({
+      include: [/\.vue$/],
     }),
-    // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
-    vuetify({
-      autoImport: true,
-    }),
+    eslintPlugin(),
 
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
@@ -31,18 +28,22 @@ export default defineConfig({
       extensions: ["vue", "ts", "js"],
     }),
 
-    // https://github.com/antfu/unplugin-auto-import#configuration
+    // https://github.com/antfu/unplugin-auto-import
     AutoImport({
-      /* options */
+      dts: "src/auto-imports.d.ts",
+      vueTemplate: true,
+      // global imports to register
+      imports: ["vue", "vue-router"],
+      // Auto import for module exports under directories
+      dirs: [],
     }),
 
-    // https://github.com/antfu/unplugin-vue-components#configuration
+    // https://github.com/antfu/unplugin-vue-components
     Components({
-      /* options */
+      extensions: ["vue"],
+      // filters for transforming targets
+      include: [/\.vue$/, /\.vue\?vue/],
+      dts: "src/components.d.ts",
     }),
   ],
-  define: { "process.env": {} },
-  server: {
-    port: 3000,
-  },
 });

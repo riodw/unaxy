@@ -1,23 +1,37 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "ESNext",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "target": "esnext",
+    "module": "esnext",
     "strict": true,
+    "useDefineForClassFields": true,
+    "moduleResolution": "node",
     "jsx": "preserve",
+    "sourceMap": true,
+    "strictNullChecks": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noUnusedLocals": true,
     "esModuleInterop": true,
-    "lib": ["ESNext", "DOM"],
+    "allowJs": true,
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "skipLibCheck": true,
-    "noEmit": true,
+    "types": ["vite/client", "vite-plugin-pages/client"],
+    "forceConsistentCasingInFileNames": true,
     "paths": {
+      "~/*": ["src/*"],
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }],
-  "exclude": ["node_modules"]
+  "include": [
+    "vite.config.*",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*",
+    "src/**/*.vue",
+    "src/pages/.vue.ts"
+  ],
+  "exclude": ["dist", "node_modules"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

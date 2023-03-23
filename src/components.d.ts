@@ -9,7 +9,9 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
+    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    NavLeft: typeof import('./components/NavLeft.vue')['default']
+    NavTop: typeof import('./components/NavTop.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -1,0 +1,24 @@
+$border-radius: 0;
+// $btn-border-radius: 0;
+
+$enable-grid-classes: false;
+$enable-cssgrid: true;
+
+$nav-tabs-link-active-bg: #000;
+
+$body-color: #000;
+
+$card-border-width: 0;
+// $body-secondary-color: #000;
+// $body-tertiary-color: #000;
+$card-cap-bg: #fff;
+
+// $theme-colors: (
+//   "primary": #000,
+// );
+
+@import "bootstrap";
+
+.btn-outline-dark {
+  --bs-btn-border-color: #000;
+}

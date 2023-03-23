@@ -1,0 +1,23 @@
+{
+  "env": {
+    "node": true
+  },
+  "globals": {
+    "defineProps": "readonly",
+    "defineEmits": "readonly",
+    "withDefaults": "readonly"
+  },
+  "extends": [
+    "@vue/typescript/recommended",
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+    "prettier"
+  ],
+  "rules": {
+    // override/add rules settings here, such as:
+    "vue/no-unused-vars": "off",
+    "no-unused-vars": "off",
+    "vue/multi-word-component-names": "off",
+    "@typescript-eslint/no-explicit-any": "off"
+  }
+}

@@ -1,35 +1,33 @@
-// https:github.com/vuetifyjs/vuetify/tree/master/packages/docs/src
 import { createApp } from "vue";
+// import "./registerServiceWorker";
 import { createPinia } from "pinia";
 import { createRouter, createWebHashHistory } from "vue-router";
 import App from "./App.vue";
 import routes from "~pages";
 
-// Styles
-import "@mdi/font/css/materialdesignicons.css";
-import "vuetify/styles";
-// Composables
-import { createVuetify } from "vuetify";
-import { md1 } from "vuetify/blueprints";
-import { md2 } from "vuetify/blueprints";
-import { md3 } from "vuetify/blueprints";
+// routes.push({
+//   path: "/properties/:id",
+//   name: "property",
+//   component: () => import("./pages/properties/[id].vue"),
+// });
 
-// Plugins
-import { registerPlugins } from "@/plugins";
+// Day JS
+// import dayjs from "dayjs";
+// Apex Charts
+// import VueApexCharts from "vue3-apexcharts";
 
-const vuetify = createVuetify({
-  blueprint: md1,
-  theme: {
-    themes: {
-      light: {
-        colors: {
-          primary: "#000",
-          secondary: "#5CBBF6",
-        },
-      },
-    },
-  },
-});
+// Bootstrap
+// import "bootstrap";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// Font
+import "@fontsource/roboto/100.css";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import "@fontsource/roboto/900.css";
+
+import "@/_variables.scss";
 
 // store
 const pinia = createPinia();
@@ -46,10 +44,10 @@ const router = createRouter({
 
 const app = createApp(App);
 
-registerPlugins(app);
+// app.provide("dayJS", dayjs);
 
 app.use(pinia);
 app.use(router);
-app.use(vuetify);
+// app.use(VueApexCharts);
 
 app.mount("#app");
